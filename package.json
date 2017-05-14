@@ -16,7 +16,8 @@
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test:watch": "nwb test-react --server",
+    "ghpages": "gh-pages -d demo/dist"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",
+    "gh-pages": "^1.0.0",
     "nwb": "0.15.x",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
