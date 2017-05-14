@@ -9,6 +9,8 @@ Creates an image mosaic in a canvas element.
 ## Basic Usage
 
 ```
+import ReactImageMosaic from 'react-image-mosaic'
+
 <ReactImageMosaic
     width={ 400 }
     height={ 400 }
