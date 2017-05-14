@@ -1,6 +1,6 @@
 {
   "name": "react-image-mosaic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Creates an image mosaic in a canvas element.",
   "main": "lib/index.js",
   "module": "es/index.js",
