@@ -18,7 +18,7 @@ Creates an image mosaic in a canvas element.
 
 ## Examples
 
-[Interactive example with loader](https://thejsn.github.io/react-image-mosaic/)
+[Interactive example with loader](https://thejsn.github.io/react-image-mosaic/) - [source](https://github.com/thejsn/react-image-mosaic/blob/master/demo/src/index.js)
 
 ## Settings
 
