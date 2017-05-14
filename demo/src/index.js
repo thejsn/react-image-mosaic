@@ -3,8 +3,9 @@ import { render } from 'react-dom'
 import ReactImageMosaic from '../../src/index';
 
 import Images from '../assets/images.json';
+import './index.css';
 
-const STATIC = '/assets/';
+const STATIC = 'assets/';
 
 export default class Demo extends Component {
 	
