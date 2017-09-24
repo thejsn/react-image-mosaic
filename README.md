@@ -34,7 +34,7 @@ import ReactImageMosaic from 'react-image-mosaic'
 | `height` | 400 | The height of the canvas. |
 | `columns` | 40 | The number of columns of images in the mosaic. |
 | `rows` | 40 | The number of rows of images in the mosaic. |
-| `colorBlending` | 08 | The amount of blending between each image and its matching color. A number between 0 and 1. |
+| `colorBlending` | 0.8 | The amount of blending between each image and its matching color. A number between 0 and 1. |
 | `target` | null | The target image to recreate. Can be a string or an image, the string is assumed to be a url to an image. |
 | `sources` | [] | An array with urls to images to be used to build the mosaic. |
 | `onClick` |  | A function that is called when user clicks on the canvas. Receives some information about the image clicked. |
