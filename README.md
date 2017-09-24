@@ -2,6 +2,8 @@
 
 Creates an image mosaic in a canvas element.
 
+![Image mosaic example](https://thejsn.github.io/react-image-mosaic/assets/examples/cat.png)
+
 ## Installation
 
 `npm i react-image-mosaic`
