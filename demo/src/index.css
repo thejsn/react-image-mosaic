@@ -1,3 +1,64 @@
-html {
+@font-face {
+    font-family: 'open_sanssemibold';
+    src: url('../assets/fonts/OpenSans-Semibold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
     font-family: Helvetica, sans-serif;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+	color: #181411;
+    
+	padding: 0;
+	margin: 0;
+	background: #efefef;
+}
+
+h1 {
+    font-weight: 100;
+    font-size: 64px;
+}
+
+pre {
+    border-radius: 2px;
+    padding: 1em 1.4em;
+    background: rgba(0, 0, 0, 0.1);
+    margin: 2em auto;
+    width: 320px;
+}
+
+a {
+    color: #000;
+}
+
+canvas {
+    cursor: pointer;
+    max-width: 100%;
+}
+
+img {
+    max-width: 100%;
+}
+
+p {
+    color: #4e4e4e;
+    margin: 0.4em 0 2em;
+}
+
+.note {
+    font-style: italic;
+    font-size: 13px;
+}
+
+.demo-container {
+    margin: 0 auto;
+    max-width: 100%;
+    width: 960px;
+    text-align: center;
 }
