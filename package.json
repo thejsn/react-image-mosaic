@@ -19,7 +19,6 @@
     "test:watch": "nwb test-react --server",
     "ghpages": "gh-pages -d demo/dist"
   },
-  "dependencies": {},
   "peerDependencies": {
     "react": "15.x"
   },
@@ -30,7 +29,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },
-  "author": "",
+  "author": "thejsn",
   "homepage": "",
   "license": "MIT",
   "repository": "https://github.com/thejsn/react-image-mosaic",
