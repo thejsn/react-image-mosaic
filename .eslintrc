@@ -1,0 +1,26 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+	  "@typescript-eslint"
+	],
+	"extends": [
+	  "eslint:recommended",
+	  "plugin:@typescript-eslint/eslint-recommended",
+	  "plugin:@typescript-eslint/recommended"
+	],
+	"rules": {
+		"indent": ["error", 4, {
+			"SwitchCase": 1,
+			"ignoredNodes": ["TemplateLiteral"]
+		}],
+		"eol-last": ["error", "always"],
+		"no-trailing-spaces": ["error", { "ignoreComments": true }],
+		"object-curly-spacing": ["error", "always", {
+			"objectsInObjects": false,
+			"arraysInObjects": false
+		}],
+		"@typescript-eslint/no-empty-function": "off",
+		"@typescript-eslint/no-explicit-any": "off"
+	}
+  }
