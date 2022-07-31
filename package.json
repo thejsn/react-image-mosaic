@@ -16,6 +16,7 @@
     "demo:dev": "parcel demo/index.html --dist-dir demo/dist",
     "demo:static": "mkdir -p demo/dist/assets/ && cp -r demo/assets/images demo/dist/assets/ && cp -r demo/assets/examples demo/dist/assets/",
     "demo:build": "parcel build --target demo && npm run demo:static",
+    "build": "npm run rollup && npm run demo:build",
     "rollup": "rollup -c",
     "ghpages": "gh-pages -d demo/dist"
   },
