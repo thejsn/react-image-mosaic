@@ -1,11 +1,11 @@
 import { FC } from 'react';
-declare type ImageInfo = {
+export declare type MosaicImageInfo = {
     column: number;
     row: number;
     color: number;
     image: HTMLImageElement;
 };
-declare type Props = {
+declare type MosaicProps = {
     width: number;
     height: number;
     columns: number;
@@ -14,11 +14,11 @@ declare type Props = {
     target: string | HTMLImageElement;
     sources: string[];
     onClick: {
-        (info: ImageInfo): void;
+        (info: MosaicImageInfo): void;
     };
     onLoadProgress: {
         (progress: number): void;
     };
 };
-export declare const ReactImageMosaic: FC<Props>;
+export declare const ReactImageMosaic: FC<MosaicProps>;
 export {};

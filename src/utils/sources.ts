@@ -6,7 +6,8 @@ let currentSources: string[] = [];
 export function updateSources(
     sources: string[],
     onProgress: { (progress:number):void },
-    onComplete: { ():void }) {
+    onComplete: { ():void }
+) {
 
     const toAdd = sources.filter(source => currentSources.indexOf(source) === -1);
 
@@ -17,7 +18,7 @@ export function updateSources(
 
     currentSources = sources;
 
-    toAdd.forEach(addSourceFromURL(onProgress, onComplete));
+    addSourcesFromURL(toAdd, onProgress, onComplete);
 }
 
 /**
@@ -25,27 +26,18 @@ export function updateSources(
  * 
  * @param {String} url Path to image
  */
-export function addSourceFromURL(
+export function addSourcesFromURL(
+    urls: string[],
     onProgress: { (progress:number):void },
     onComplete: { ():void }
 ) {
-    return (url: string) => {
-        return ImageLoader.load(url)
-            .then((image: HTMLImageElement) => {
-                Grid.addSourceImage(image);
-            })
-            .catch((error: string) => {
-                console.warn('[mosaic.js] Error loading ' + url + ' - ', error);
-            })
-            .then(() => {
+    return ImageLoader.loadAll(urls, onProgress)
+        .then((images: HTMLImageElement[]) => {
 
-                if(onProgress) {
-                    onProgress(ImageLoader.progress);
-                }
-
-                if (onComplete && ImageLoader.progress == 1) {
-                    onComplete();
-                }
+            images.forEach(img => {
+                Grid.addSourceImage(img);
             });
-    }
+
+            onComplete();
+        })
 }

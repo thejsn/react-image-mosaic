@@ -5,14 +5,14 @@ import { getMousePosition } from './utils/helpers';
 import { createTargetPicture } from './utils/target';
 import { updateSources } from './utils/sources';
 
-type RIMImageInfo = {
+export type MosaicImageInfo = {
     column: number,
     row: number,
     color: number,
     image: HTMLImageElement
 }
 
-type RIMProps = {
+type MosaicProps = {
 	width: number,
 	height: number,
 	columns: number,
@@ -20,11 +20,11 @@ type RIMProps = {
 	colorBlending: number,
 	target: string | HTMLImageElement,
 	sources: string[],
-	onClick: { (info: RIMImageInfo): void },
+	onClick: { (info: MosaicImageInfo): void },
 	onLoadProgress: { (progress: number): void }
 };
 
-export const ReactImageMosaic: FC<RIMProps> = ({
+export const ReactImageMosaic: FC<MosaicProps> = ({
     width,
     height,
     columns,
@@ -52,8 +52,7 @@ export const ReactImageMosaic: FC<RIMProps> = ({
 
             createTargetPicture(target, columns, rows, pixelAspectRatio)
                 .then(image => {targetPicture.current = image;})
-                .then(() => {if(targetPicture.current) { Grid.drawGrid(targetPicture.current) }})
-                .then(() => drawCanvas());
+                .then(() => updateGrid());
         }
     }, [target]);
 
@@ -63,10 +62,14 @@ export const ReactImageMosaic: FC<RIMProps> = ({
         if(sources) {
             updateSources(sources,
                 // A source image is loaded
-                (progress) => onLoadProgress(progress),
+                (progress) => {
+                    onLoadProgress(progress)
+                },
 
                 // All source images loaded
-                () => drawCanvas()
+                () => {
+                    updateGrid()
+                }
             );
         }
     }, [sources]);
@@ -79,6 +82,11 @@ export const ReactImageMosaic: FC<RIMProps> = ({
 
         Grid.setSize(width, height, columns, rows);
 
+        updateGrid();
+
+    }, [width, height, columns, rows]);
+
+    function updateGrid() {
         if (targetPicture.current && Grid.poolSize > 0) {
             const pixelAspectRatio = (width / columns) / (height / rows);
             targetPicture.current?.setSize(columns, rows, pixelAspectRatio);
@@ -86,8 +94,7 @@ export const ReactImageMosaic: FC<RIMProps> = ({
             Grid.drawGrid(targetPicture.current)
                 .then(() => drawCanvas());
         }
-    }, [width, height, columns, rows]);
-
+    }
     // -------------------------------------------------------------
     // Listeners
 
@@ -105,7 +112,7 @@ export const ReactImageMosaic: FC<RIMProps> = ({
                 row: row,
                 color: color,
                 image: pic.image
-            } as RIMImageInfo)
+            } as MosaicImageInfo)
         }
     }
 

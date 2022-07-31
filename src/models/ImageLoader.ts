@@ -3,7 +3,12 @@ class ImageLoader {
     _loadCount = 0;
     _completeCount = 0;
 
+    constructor() {
+        this.loadComplete = this.loadComplete.bind(this);
+    }
+
     loadComplete() {
+
         this._completeCount++;
 
         if (this._loadCount === this._completeCount) {
@@ -31,9 +36,32 @@ class ImageLoader {
 	 * @return {Promise}
 	 */
     load(url: string): Promise<HTMLImageElement> {
-
         this._loadCount++;
+        return this.loadImage(url, this.loadComplete);
+    }
 
+    /**
+     * 
+     * @param urls 
+     * @param onProgress 
+     * @returns 
+     */
+    loadAll(
+        urls: string[],
+        onProgress: { (progress: number): void } | null
+    ): Promise<HTMLImageElement[]> {
+        this._loadCount += urls.length;
+
+        return Promise.allSettled( urls.map(url => this.loadImage(url, this.loadComplete, onProgress)) )
+            .then(results => results.map(res => res.status === 'fulfilled' ? res.value : null))
+            .then(results => results.filter(isImage));
+    }
+
+    loadImage(
+        url: string,
+        onComplete: { (): void } | null = null,
+        onProgress: { (progress:number): void } | null = null,
+    ): Promise<HTMLImageElement> {
         return new Promise((resolve, reject) => {
 
             // eslint-disable-next-line no-undef
@@ -41,12 +69,16 @@ class ImageLoader {
 
             img.onload = () => {
                 resolve(img);
-                this.loadComplete();
+
+                if(onComplete) { onComplete(); }
+                if(onProgress) { onProgress(this.progress); }
             }
 
             img.onerror = (response) => {
                 reject(response);
-                this.loadComplete();
+
+                if(onComplete) { onComplete(); }
+                if(onProgress) { onProgress(this.progress); }
             }
 
             img.src = url;
@@ -55,3 +87,7 @@ class ImageLoader {
 }
 
 export default new ImageLoader();
+
+function isImage(image: any): image is HTMLImageElement {
+    return image instanceof HTMLImageElement
+}

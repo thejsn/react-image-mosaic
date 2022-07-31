@@ -62,10 +62,7 @@ class Grid {
             diffg	= green - sg;
             diffb	= blue - sb;
 
-            const distance = diffr + diffg + diffb;
-
-            // ?
-            // let distance = Math.sqrt((diffr * diffr) + (diffg * diffg) + (diffb * diffb));
+            const distance = Math.sqrt((diffr * diffr) + (diffg * diffg) + (diffb * diffb));
 
             if (distance === 0) {
                 // Exact match, no need to keep looking.
@@ -208,7 +205,14 @@ class Grid {
 
             if(!pixels || !this._context || !this._pictures.size) {
                 this._hasSuccessfulPaint = false;
-                reject('No pixel data');
+
+                const msg = [
+                    !pixels && 'Target has no image data (pixels).',
+                    !this._context && 'Grid canvas context is not set.',
+                    !this._pictures.size && 'Sources are not loaded.',
+                ].filter(m=>m);
+
+                reject(msg.join(', '));
                 return;
             }
 

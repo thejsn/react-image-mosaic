@@ -25,7 +25,7 @@ h1 {
     font-size: 64px;
 }
 
-pre {
+.loading {
     border-radius: 2px;
     padding: 1em 1.4em;
     background: rgba(0, 0, 0, 0.1);
@@ -40,6 +40,7 @@ a {
 canvas {
     cursor: pointer;
     max-width: 100%;
+    border-radius: 4px;
 }
 
 img {
@@ -48,12 +49,12 @@ img {
 
 p {
     color: #4e4e4e;
-    margin: 0.4em 0 2em;
 }
 
 .note {
     font-style: italic;
     font-size: 13px;
+    margin: 1em 0 0;
 }
 
 .demo-container {
@@ -61,4 +62,52 @@ p {
     max-width: 100%;
     width: 960px;
     text-align: center;
+}
+
+.target-image {
+    margin: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.mosaic-container {
+    margin: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    line-height: 0;
+}
+
+.controls-container {
+    text-align: left;
+    margin: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.control {
+    /* outline: 1px solid #f29; */
+    margin: 5px;
+}
+
+.control pre {
+    margin: 0;
+}
+
+.control input {
+    width: 120px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.control label {
+    /* outline: 1px solid #f29; */
+    padding: 10px;
+    display: inline-block;
+    width: 160px;
+    text-align: right;
 }

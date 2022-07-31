@@ -8,8 +8,8 @@ export declare function updateSources(sources: string[], onProgress: {
  *
  * @param {String} url Path to image
  */
-export declare function addSourceFromURL(onProgress: {
+export declare function addSourcesFromURL(urls: string[], onProgress: {
     (progress: number): void;
 }, onComplete: {
     (): void;
-}): (url: string) => Promise<void>;
+}): Promise<void>;

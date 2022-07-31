@@ -5,11 +5,18 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
+  "targets": {
+    "demo":{
+      "source": "demo/index.html",
+      "distDir": "demo/dist",
+      "isLibrary": false
+    }
+  },
   "scripts": {
-    "build": "npm run build:esm && npm run build:cjs",
+    "demo:dev": "parcel demo/index.html --dist-dir demo/dist",
+    "demo:static": "mkdir -p demo/dist/assets/ && cp -r demo/assets/images demo/dist/assets/ && cp -r demo/assets/examples demo/dist/assets/",
+    "demo:build": "parcel build --target demo && npm run demo:static",
     "rollup": "rollup -c",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
     "ghpages": "gh-pages -d demo/dist"
   },
   "author": "thejsn",
@@ -29,6 +36,10 @@
     "@typescript-eslint/parser": "^5.30.7",
     "eslint": "^8.20.0",
     "gh-pages": "^4.0.0",
+    "parcel": "^2.6.2",
+    "process": "^0.11.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rollup": "^2.77.2",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-peer-deps-external": "^2.2.4",
