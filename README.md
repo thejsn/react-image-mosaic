@@ -11,13 +11,14 @@ Creates an image mosaic in a canvas element.
 ## Basic Usage
 
 ```
-import ReactImageMosaic from 'react-image-mosaic'
+import { ReactImageMosaic } from 'react-image-mosaic'
 
 <ReactImageMosaic
     width={ 400 }
     height={ 400 }
     sources={ ['path/to/image.jpg', 'path/to/image2.jpg'] } 
-    target={ 'path/to/image.jpg' } />
+    target={ 'path/to/image.jpg' }
+/>
 ```
 
 ## Examples
