@@ -13,23 +13,23 @@ export type MosaicImageInfo = {
 }
 
 type MosaicProps = {
-	width: number,
-	height: number,
-	columns: number,
-	rows: number,
-	colorBlending: number,
+	width?: number,
+	height?: number,
+	columns?: number,
+	rows?: number,
+	colorBlending?: number,
 	target: string | HTMLImageElement,
 	sources: string[],
-	onClick: { (info: MosaicImageInfo): void },
-	onLoadProgress: { (progress: number): void }
+	onClick?: { (info: MosaicImageInfo): void } | null,
+	onLoadProgress?: { (progress: number): void } | null
 };
 
 export const ReactImageMosaic: FC<MosaicProps> = ({
-    width,
-    height,
-    columns,
-    rows,
-    colorBlending,
+    width = 400,
+    height = 400,
+    columns = 40,
+    rows = 40,
+    colorBlending = 0.8,
     target,
     sources,
     onClick,
@@ -63,7 +63,7 @@ export const ReactImageMosaic: FC<MosaicProps> = ({
             updateSources(sources,
                 // A source image is loaded
                 (progress) => {
-                    onLoadProgress(progress)
+                    if(onLoadProgress) { onLoadProgress(progress) }
                 },
 
                 // All source images loaded
