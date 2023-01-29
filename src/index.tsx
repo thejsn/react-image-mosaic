@@ -4,6 +4,7 @@ import Picture from './models/Picture';
 import { getMousePosition } from './utils/helpers';
 import { createTargetPicture } from './utils/target';
 import { updateSources } from './utils/sources';
+import ImageLoader from './models/ImageLoader';
 
 export type MosaicImageInfo = {
     column: number,
@@ -20,6 +21,7 @@ type MosaicProps = {
 	colorBlending?: number,
 	target: string | HTMLImageElement,
 	sources: string[],
+    crossOrigin?: string | null,
 	onClick?: { (info: MosaicImageInfo): void } | null,
 	onLoadProgress?: { (progress: number): void } | null
 };
@@ -32,6 +34,7 @@ export const ReactImageMosaic: FC<MosaicProps> = ({
     colorBlending = 0.8,
     target,
     sources,
+    crossOrigin,
     onClick,
     onLoadProgress
 }) => {
@@ -40,8 +43,12 @@ export const ReactImageMosaic: FC<MosaicProps> = ({
     const targetPicture = useRef<Picture|null>(null);
 
     useEffect(() => {
+        ImageLoader.crossOrigin = crossOrigin;
+    }, [crossOrigin]);
+
+    useEffect(() => {
         Grid.colorBlending = colorBlending;
-        drawCanvas();
+        updateGrid();
     }, [colorBlending]);
 
     useEffect(() => {

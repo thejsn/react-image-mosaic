@@ -38,6 +38,7 @@ import { ReactImageMosaic } from 'react-image-mosaic'
 | `colorBlending` | 0.8 | The amount of blending between each image and its matching color. A number between 0 and 1. |
 | `target` | null | The target image to recreate. Can be a string or an image, the string is assumed to be a url to an image. |
 | `sources` | [] | An array with urls to images to be used to build the mosaic. |
+| `crossOrigin` |  | The crossorigin attribute passed to images that are loaded. Read more [here](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/crossOrigin#value)|
 | `onClick` |  | A function that is called when user clicks on the canvas. Receives some information about the image clicked. |
 | `onLoadProgress` |  | A function called every time a source image has loaded. Receives the progress as a number between 0 and 1. |
 
