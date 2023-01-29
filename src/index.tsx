@@ -48,7 +48,7 @@ export const ReactImageMosaic: FC<MosaicProps> = ({
 
     useEffect(() => {
         Grid.colorBlending = colorBlending;
-        drawCanvas();
+        updateGrid();
     }, [colorBlending]);
 
     useEffect(() => {
