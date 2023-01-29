@@ -1,7 +1,10 @@
+
 class ImageLoader {
 
     _loadCount = 0;
     _completeCount = 0;
+
+    crossOrigin: string | null | undefined = null;
 
     constructor() {
         this.loadComplete = this.loadComplete.bind(this);
@@ -66,6 +69,9 @@ class ImageLoader {
 
             // eslint-disable-next-line no-undef
             const img = new Image();
+            if(typeof this.crossOrigin === 'string') {
+                img.crossOrigin = this.crossOrigin;
+            }
 
             img.onload = () => {
                 resolve(img);
