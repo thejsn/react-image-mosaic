@@ -12,7 +12,7 @@ class Grid {
 
     _colors: number[] = [];
     _gridColors: number[] = [];
-    _pictures = new Map();
+    _pictures = new Map<number, Picture | undefined>();
 
     _canvas: HTMLCanvasElement | null = null;
     _context: CanvasRenderingContext2D | null = null;
@@ -22,7 +22,7 @@ class Grid {
 
     /**
 	 * Creates an instance of Grid.
-	 * 
+	 *
 	 * @memberOf Grid
 	 */
     constructor() {
@@ -91,10 +91,10 @@ class Grid {
     }
 
     /**
-	 * Returns a Picture with the average 
+	 * Returns a Picture with the average
 	 * color that closest matches given color.
 	 */
-    getPictureByColor(color: number): Picture {
+    getPictureByColor(color: number): Picture | undefined {
         return this._pictures.get(this.getClosestColor(color));
     }
 
@@ -166,7 +166,7 @@ class Grid {
 
             const color = this._colors[i];
 
-            this._pictures.get(color).setSize(
+            this._pictures.get(color)?.setSize(
                 Math.floor(this._width / this._columns),
                 Math.floor(this._height / this._rows)
             );
@@ -195,6 +195,29 @@ class Grid {
     }
 
     /**
+	 * Remove from pool of pictures to not be used in mosaic anymore.
+	 * @param {string} url Picture url to remove
+	 */
+    removeSourceImage(url: string) {
+
+        // Iterate over _pictures Map
+        this._pictures.forEach((picture, color) => {
+
+            if (picture?.src === url) {
+
+                //remove color from colors array
+                const pos = this._colors.indexOf(color);
+                if (pos !== -1) {
+                    this._colors.splice(pos, 1);
+                }
+
+                //remove image from pictures Map
+                this._pictures.delete(color);
+            }
+        });
+    }
+
+    /**
 	 * Draw images to grid.
 	 */
     drawGrid(target:Picture): Promise<void> {
@@ -219,7 +242,7 @@ class Grid {
             this.resetGridSquares();
 
             const blending = this._colorBlending;
-            let pic: Picture | null = null;
+            let pic: Picture | undefined = undefined;
 
             let i = 0, // index
                 j = 0, // pixel position (ix4)
@@ -255,7 +278,7 @@ class Grid {
                 if (blending < 1) {
                     pic = this.getPictureByColor(color);
                     ctx.drawImage(
-                        pic.canvas as CanvasImageSource,
+                        pic?.canvas as CanvasImageSource,
                         x, y, w, h
                     );
                 }
