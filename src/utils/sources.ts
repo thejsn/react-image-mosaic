@@ -37,12 +37,11 @@ export function removeSourcesByURL(sources: string[]) {
         Grid.removeSourceImage(img);
      });
 
-    addSourcesFromURL(toAdd, onProgress, onComplete);
 }
 
 /**
  * Add image to be used in the grid from URL.
- * 
+ *
  * @param {String} url Path to image
  */
 export function addSourcesFromURL(

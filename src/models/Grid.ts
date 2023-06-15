@@ -12,7 +12,7 @@ class Grid {
 
     _colors: number[] = [];
     _gridColors: number[] = [];
-    _pictures = new Map<number, Picture | undefined>();
+    _pictures = new Map<number, Picture>();
 
     _canvas: HTMLCanvasElement | null = null;
     _context: CanvasRenderingContext2D | null = null;
@@ -93,9 +93,11 @@ class Grid {
     /**
 	 * Returns a Picture with the average
 	 * color that closest matches given color.
+     * "using as Picture" because Map.get can theoretically return undefined,
+     * but not if we using .getClosestColor as key
 	 */
-    getPictureByColor(color: number): Picture | undefined {
-        return this._pictures.get(this.getClosestColor(color));
+    getPictureByColor(color: number): Picture {
+        return this._pictures.get(this.getClosestColor(color)) as Picture;
     }
 
     //---------------------------------------
@@ -203,7 +205,7 @@ class Grid {
         // Iterate over _pictures Map
         this._pictures.forEach((picture, color) => {
 
-            if (picture?.src === url) {
+            if (picture.src === url) {
 
                 //remove color from colors array
                 const pos = this._colors.indexOf(color);
@@ -242,7 +244,7 @@ class Grid {
             this.resetGridSquares();
 
             const blending = this._colorBlending;
-            let pic: Picture | undefined = undefined;
+            let pic: Picture | null = null;
 
             let i = 0, // index
                 j = 0, // pixel position (ix4)
@@ -278,7 +280,7 @@ class Grid {
                 if (blending < 1) {
                     pic = this.getPictureByColor(color);
                     ctx.drawImage(
-                        pic?.canvas as CanvasImageSource,
+                        pic.canvas as CanvasImageSource,
                         x, y, w, h
                     );
                 }
