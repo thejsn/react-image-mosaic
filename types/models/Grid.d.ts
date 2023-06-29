@@ -7,7 +7,7 @@ declare class Grid {
     _rows: number;
     _colors: number[];
     _gridColors: number[];
-    _pictures: Map<any, any>;
+    _pictures: Map<number, Picture>;
     _canvas: HTMLCanvasElement | null;
     _context: CanvasRenderingContext2D | null;
     _hasSuccessfulPaint: boolean;
@@ -52,6 +52,11 @@ declare class Grid {
      * @param {HTMLImageElement} image A Picture
      */
     addSourceImage(image: HTMLImageElement): void;
+    /**
+     * Remove from pool of pictures to not be used in mosaic anymore.
+     * @param {string} url Picture url to remove
+     */
+    removeSourceImage(url: string): void;
     /**
      * Draw images to grid.
      */
