@@ -56,6 +56,7 @@ export default class Picture {
     get context(): CanvasRenderingContext2D | null;
     get averageColor(): number;
     get image(): HTMLImageElement | null;
+    get src(): string | null;
     /**
      * This will redraw the image. Avoid this in loops/raf.
      *

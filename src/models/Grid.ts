@@ -12,7 +12,7 @@ class Grid {
 
     _colors: number[] = [];
     _gridColors: number[] = [];
-    _pictures = new Map();
+    _pictures = new Map<number, Picture>();
 
     _canvas: HTMLCanvasElement | null = null;
     _context: CanvasRenderingContext2D | null = null;
@@ -22,7 +22,7 @@ class Grid {
 
     /**
 	 * Creates an instance of Grid.
-	 * 
+	 *
 	 * @memberOf Grid
 	 */
     constructor() {
@@ -91,11 +91,13 @@ class Grid {
     }
 
     /**
-	 * Returns a Picture with the average 
+	 * Returns a Picture with the average
 	 * color that closest matches given color.
+     * "using as Picture" because Map.get can theoretically return undefined,
+     * but not if we using .getClosestColor as key
 	 */
     getPictureByColor(color: number): Picture {
-        return this._pictures.get(this.getClosestColor(color));
+        return this._pictures.get(this.getClosestColor(color)) as Picture;
     }
 
     //---------------------------------------
@@ -166,7 +168,7 @@ class Grid {
 
             const color = this._colors[i];
 
-            this._pictures.get(color).setSize(
+            this._pictures.get(color)?.setSize(
                 Math.floor(this._width / this._columns),
                 Math.floor(this._height / this._rows)
             );
@@ -192,6 +194,29 @@ class Grid {
 
         // Save color in array for quick search later.
         this._colors.push(color);
+    }
+
+    /**
+	 * Remove from pool of pictures to not be used in mosaic anymore.
+	 * @param {string} url Picture url to remove
+	 */
+    removeSourceImage(url: string) {
+
+        // Iterate over _pictures Map
+        this._pictures.forEach((picture, color) => {
+
+            if (picture.src === url) {
+
+                //remove color from colors array
+                const pos = this._colors.indexOf(color);
+                if (pos !== -1) {
+                    this._colors.splice(pos, 1);
+                }
+
+                //remove image from pictures Map
+                this._pictures.delete(color);
+            }
+        });
     }
 
     /**

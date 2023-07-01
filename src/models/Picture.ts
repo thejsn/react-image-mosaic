@@ -11,12 +11,12 @@ export default class Picture {
 
     /**
 	 * Creates an instance of Picture.
-	 * 
-	 * @param {any} image 
-	 * @param {number} [width=10] 
-	 * @param {number} [height=10] 
-	 * @param {number} [aspectRatio=1] 
-	 * 
+	 *
+	 * @param {any} image
+	 * @param {number} [width=10]
+	 * @param {number} [height=10]
+	 * @param {number} [aspectRatio=1]
+	 *
 	 * @memberOf Picture
 	 */
     constructor(image: HTMLImageElement, width = 10, height = 10, aspectRatio = 1) {
@@ -46,9 +46,9 @@ export default class Picture {
     //---------------------------------------
 
     /**
-	 * Get image dimensions based on source image 
+	 * Get image dimensions based on source image
 	 * and dimensions of grid square.
-	 * 
+	 *
 	 * @return {Object} Object with size data.
 	 */
     _getBounds(image: HTMLImageElement) {
@@ -94,9 +94,9 @@ export default class Picture {
 
     /**
 	 * Draws image to virtual canvas which is used to retrieve pixels.
-	 * 
-	 * @returns 
-	 * 
+	 *
+	 * @returns
+	 *
 	 * @memberOf Picture
 	 */
     _drawImage() {
@@ -122,11 +122,11 @@ export default class Picture {
     }
 
     /**
-	 * Loops through all colors, adds all channels together 
+	 * Loops through all colors, adds all channels together
 	 * then returns it as a color value.
-	 * 
+	 *
 	 * @returns {number} The color.
-	 * 
+	 *
 	 * @memberOf Picture
 	 */
     _calculateAverageColor(pixels: Uint8ClampedArray | undefined) {
@@ -182,13 +182,17 @@ export default class Picture {
         return this._image;
     }
 
+    get src() {
+        return this._image?.src || null
+    }
+
     //---------------------------------------
     // Public methods
     //---------------------------------------
 
     /**
 	 * This will redraw the image. Avoid this in loops/raf.
-	 * 
+	 *
 	 * @param {Number} width  New width.
 	 * @param {Number} height New height.
 	 */
@@ -210,9 +214,9 @@ export default class Picture {
 
     /**
 	 * Returns an array of pixeldata.
-	 * 
+	 *
 	 * @returns {Uint8ClampedArray}
-	 * 
+	 *
 	 * @memberOf Picture
 	 */
     getImageData() {
@@ -221,9 +225,9 @@ export default class Picture {
 
     /**
 	 * Set image to do analysis on. Image source must be loaded.
-	 * 
-	 * @param {Image} image 
-	 * 
+	 *
+	 * @param {Image} image
+	 *
 	 * @memberOf Picture
 	 */
     setImage(image: HTMLImageElement) {
