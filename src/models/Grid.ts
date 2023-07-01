@@ -279,10 +279,12 @@ class Grid {
 
                 if (blending < 1) {
                     pic = this.getPictureByColor(color);
-                    ctx.drawImage(
-                        pic.canvas as CanvasImageSource,
-                        x, y, w, h
-                    );
+                    if(pic){
+                        ctx.drawImage(
+                            pic.canvas as CanvasImageSource,
+                            x, y, w, h
+                        );
+                    }
                 }
 
                 if (blending > 0) {
