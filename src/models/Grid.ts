@@ -189,11 +189,14 @@ class Grid {
 
         const color = picture.averageColor;
 
+        // If this color is not already present
+        if (!this._pictures.has(color)) {
+            // Save color in array for quick search later.
+            this._colors.push(color);
+        }
         // The average color of the image is its key.
         this._pictures.set(color, picture);
 
-        // Save color in array for quick search later.
-        this._colors.push(color);
     }
 
     /**
@@ -279,12 +282,10 @@ class Grid {
 
                 if (blending < 1) {
                     pic = this.getPictureByColor(color);
-                    if(pic){
-                        ctx.drawImage(
-                            pic.canvas as CanvasImageSource,
-                            x, y, w, h
-                        );
-                    }
+                    ctx.drawImage(
+                        pic.canvas as CanvasImageSource,
+                        x, y, w, h
+                    );
                 }
 
                 if (blending > 0) {
